@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cyberdeck Moodboard / 2126</title>
+  <style>
+    :root {
+      --bg: #d8f7ff;
+      --ink: #161616;
+      --hot: #ff4fd8;
+      --acid: #b6ff00;
+      --blue: #3e7bff;
+      --panel: rgba(255,255,255,0.72);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,79,216,.55), transparent 22rem),
+        radial-gradient(circle at 90% 20%, rgba(182,255,0,.45), transparent 18rem),
+        radial-gradient(circle at 42% 92%, rgba(62,123,255,.45), transparent 24rem),
+        linear-gradient(135deg, #eafcff 0%, #ffd8f3 42%, #d9ffe6 100%);
+      font-family: Arial Rounded MT Bold, Arial, Helvetica, sans-serif;
+      cursor: crosshair;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.26) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.22) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mix-blend-mode: screen;
+      z-index: 10;
+    }
+
+    header {
+      min-height: 80vh;
+      display: grid;
+      place-items: center;
+      padding: 6vw;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 1000px;
+      font-size: clamp(3.5rem, 13vw, 12rem);
+      line-height: .76;
+      letter-spacing: -.08em;
+      text-transform: lowercase;
+      color: white;
+      text-shadow:
+        4px 4px 0 var(--hot),
+        8px 8px 0 var(--blue),
+        12px 12px 0 rgba(0,0,0,.85);
+      transform: rotate(-2deg);
+    }
+
+    .subtitle {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: .7rem 1rem;
+      border: 2px solid #000;
+      border-radius: 999px;
+      background: var(--panel);
+      box-shadow: 5px 5px 0 #000;
+      font-size: clamp(.9rem, 2vw, 1.25rem);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    main {
+      padding: 2vw 2vw 10vw;
+    }
+
+    .wall {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: clamp(.7rem, 1.4vw, 1.4rem);
+      align-items: start;
+    }
+
+    .tile {
+      position: relative;
+      min-height: 80px;
+      border: 2px solid #000;
+      background: var(--panel);
+      box-shadow: 7px 7px 0 rgba(0,0,0,.9);
+      overflow: hidden;
+      transform: rotate(var(--rot, 0deg));
+      transition: transform .18s ease, box-shadow .18s ease, z-index .18s ease;
+    }
+
+    .tile:hover {
+      transform: rotate(0deg) scale(1.035);
+      box-shadow: 11px 11px 0 rgba(0,0,0,.9);
+      z-index: 5;
+    }
+
+    .tile img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      image-rendering: auto;
+      filter: saturate(1.18) contrast(1.03);
+    }
+
+    .poem {
+      padding: clamp(1rem, 2vw, 1.7rem);
+      font-family: "Courier New", Courier, monospace;
+      font-size: clamp(1rem, 2.3vw, 2rem);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+      white-space: pre-line;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.52)),
+        repeating-linear-gradient(0deg, transparent 0 13px, rgba(255,79,216,.14) 13px 14px);
+    }
+
+    .caption {
+      position: absolute;
+      left: .35rem;
+      bottom: .35rem;
+      padding: .2rem .45rem;
+      background: #fff;
+      border: 1px solid #000;
+      font-family: "Courier New", monospace;
+      font-size: .7rem;
+      opacity: .8;
+    }
+
+    .s1 { grid-column: span 2; aspect-ratio: 1 / 1; }
+    .s2 { grid-column: span 3; aspect-ratio: 4 / 3; }
+    .s3 { grid-column: span 4; aspect-ratio: 3 / 2; }
+    .s4 { grid-column: span 5; aspect-ratio: 5 / 4; }
+    .s5 { grid-column: span 6; aspect-ratio: 16 / 10; }
+
+    .poem.s2, .poem.s3, .poem.s4, .poem.s5 { aspect-ratio: auto; }
+
+    footer {
+      padding: 8vw 4vw 5vw;
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-size: .9rem;
+      opacity: .75;
+    }
+
+    @media (max-width: 900px) {
+      .wall { grid-template-columns: repeat(6, 1fr); }
+      .s1 { grid-column: span 2; }
+      .s2, .s3 { grid-column: span 3; }
+      .s4, .s5 { grid-column: span 6; }
+    }
+
+    @media (max-width: 560px) {
+      header { min-height: 55vh; }
+      .wall { grid-template-columns: repeat(2, 1fr); }
+      .tile, .s1, .s2, .s3, .s4, .s5 { grid-column: span 2; }
+      .poem { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>cyberdeck<br>2126</h1>
+      <div class="subtitle">offline social media for places becoming water</div>
+    </div>
+  </header>
+
+  <main>
+    <section id="wall" class="wall" aria-label="Cyberdeck moodboard image wall"></section>
+  </main>
+
+  <footer>
+    come closer / bring your cable / badly formatted archive
+  </footer>
+
+  <script>
+    // Replace or generate this list with your own files.
+    // Paths assume this index.html sits in the main moodboard folder,
+    // next to the folders: cyberdecks/ and vibes/
+    const images = [
+  "vibes/68872659041.gif",
+  "vibes/70681058693.gif",
+  "vibes/70779292445.gif",
+  "vibes/71321112096.png",
+  "vibes/71510649289.gif",
+  "vibes/72650564864.jpg",
+  "vibes/74273107505.gif",
+  "vibes/74370137923_0.jpg",
+  "vibes/74370137923_1.jpg",
+  "vibes/74599513943.gif",
+  "vibes/74599562450.gif",
+  "vibes/74662433920.gif",
+  "vibes/74712395694.gif",
+  "vibes/75035305862.jpg",
+  "vibes/75035372165.gif",
+  "vibes/75783891581.jpg",
+  "vibes/75783991611.jpg",
+  "vibes/80613902368.gif",
+  "vibes/75887547755.jpg",
+  "vibes/76363793770.jpg",
+  "vibes/76366976651.gif",
+  "vibes/76430377576.gif",
+  "vibes/77601763089.gif",
+  "vibes/79796510105.gif",
+
+  "cyberdecks/the-y2k-gadgets-you-know-and-love-cue-nostalgia-this-back-to-school-season_body-image-2.jpg",
+  "cyberdecks/0c10.jpg",
+  "cyberdecks/0e2f659189fda794d805f46ce3543c19.jpg",
+  "cyberdecks/2f82a17c1ca5f915a3024e032093e4fd.jpg",
+  "cyberdecks/8dbc723e2ba3e0ac60fdd879cbff54ca.jpg",
+  "cyberdecks/2000s Png Aesthetic.jpg",
+  "cyberdecks/699650921_1850432936138066_8829813594176035070_n.jpg",
+  "cyberdecks/Brianna_Cyberdeck.webp",
+  "cyberdecks/cyberdeck-bimbotech-scaled-1.webp",
+  "cyberdecks/PXLCAM_IMG_3869.jpg",
+  "cyberdecks/s-l1600_13_97f051b6-45c9-4486-b02c-e58d97b37c5c.webp"
+];
+
+    const poem = [
+`in the future
+we no longer say “upload”
+we say
+come closer
+plug into me
+tell me what this place did to you`,
+
+`the deck remembers sideways
+not monday
+not april
+it remembers:`,
+
+`the rooftop blue before rain
+a hand hovering over another hand
+pink silence with two insects inside it`,
+
+`moon blossom / lake static / twin sweaters
+a storm kept in a square`,
+
+`I met you at coordinate 52.3676
+you gave me 14 seconds of sea wind
+I gave you a photograph of the fence behind my childhood home`,
+
+`we both kept the timestamp
+but neither of us remembered it clearly`,
+
+`In a world that has been changing,
+the archive is casual now
+idle
+communal
+low-res
+warm in the hand`,
+
+`Press once: record the sound
+of a garden becoming marsh.`,
+
+`Joystick left: the shoreline I remember.
+Joystick right: the one you remember.`,
+
+`come closer
+bring your cable
+I have something small
+and badly formatted
+to give you.`
+    ];
+
+    const wall = document.querySelector("#wall");
+    const sizes = ["s1", "s2", "s3", "s4", "s5"];
+
+    function seededShuffle(array) {
+      // Stable pseudo-random shuffle, so the wall looks random but doesn't change on every refresh.
+      let seed = 2126;
+      function random() {
+        const x = Math.sin(seed++) * 10000;
+        return x - Math.floor(x);
+      }
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    const items = seededShuffle([
+      ...images.map(src => ({ type: "image", src })),
+      ...poem.map(text => ({ type: "poem", text }))
+    ]);
+
+    items.forEach((item, i) => {
+      const tile = document.createElement("article");
+      tile.className = `tile ${sizes[(i * 7) % sizes.length]}`;
+      tile.style.setProperty("--rot", `${((i * 11) % 9) - 4}deg`);
+
+      if (item.type === "image") {
+        const img = document.createElement("img");
+        img.src = item.src;
+        img.alt = "Cyberdeck moodboard reference";
+        img.loading = "lazy";
+        tile.appendChild(img);
+
+        const caption = document.createElement("div");
+        caption.className = "caption";
+        caption.textContent = item.src.split("/").pop();
+        tile.appendChild(caption);
+      } else {
+        tile.classList.add("poem");
+        tile.textContent = item.text;
+      }
+
+      wall.appendChild(tile);
+    });
+  </script>
+</body>
+</html>
